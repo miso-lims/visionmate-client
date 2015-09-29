@@ -1,5 +1,18 @@
 package visionmate;
 
+/**
+ * This class encapsulates the server configuration options that affect the client. It is imperative that the settings provided to 
+ * a VisionMateClient match the actual settings on the server. If they do not, the VisionMateClient's behaviour is unspecified. 
+ * Depending on the discrepencies, likely symptoms include timeouts, failed requests, and misrepresented data (e.g. "No Tube" may not 
+ * be recognized as a missing tube, instead being understood as a barcode String).
+ * 
+ * Note that the default constructor sets all options to their default values EXCEPT the Suffix Character, which is set to '#' rather than 
+ * the server's default of null. This suffix character is required for the VisionMateClient to detect end of line in the server's 
+ * responses.
+ * 
+ * It is recommended to keep with all default settings EXCEPT for the suffix character, which must be set to something. '#' is an ideal 
+ * suffix character, because the server will not use the character for anything else.
+ */
 public class ServerConfig {
   
   public static enum SortOrder {ROWS, COLUMNS};
@@ -20,6 +33,9 @@ public class ServerConfig {
   private String setProductCommand = "P";
   private String resetStatusCommand = "Q";
 
+  /**
+   * Creates a new ServerConfig with all default server settings EXCEPT for the suffix character, which is set to '#'
+   */
   public ServerConfig() {
     // Auto-generated constructor stub
   }

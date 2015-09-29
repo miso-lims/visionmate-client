@@ -10,6 +10,10 @@ import java.net.UnknownHostException;
 import org.apache.commons.net.telnet.TelnetClient;
 import org.apache.log4j.Logger;
 
+/**
+ * This class is used to connect to a Thermo Scientific VisionMate server via Telnet and issue the commands neccessary to retrieve 
+ * a scan of barcodes.
+ */
 public class VisionMateClient implements AutoCloseable {
   
   private static final int defaultTimeout = 5000;
