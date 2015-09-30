@@ -9,7 +9,7 @@ public class ScanStatusTest {
 
   @Test
   public void testAllBitsSet() {
-    ScanStatus status = new ScanStatus((byte) Integer.parseInt("255"));
+    ScanStatus status = new ScanStatus(Integer.parseInt("255"));
     assertTrue(status.isInitialized());
     assertTrue(status.isScanning());
     assertTrue(status.isFinishedScan());
@@ -21,7 +21,7 @@ public class ScanStatusTest {
   
   @Test
   public void testNoBitsSet() {
-    ScanStatus status = new ScanStatus((byte) Integer.parseInt("0"));
+    ScanStatus status = new ScanStatus(Integer.parseInt("0"));
     assertFalse(status.isInitialized());
     assertFalse(status.isScanning());
     assertFalse(status.isFinishedScan());
@@ -33,7 +33,7 @@ public class ScanStatusTest {
   
   @Test
   public void testResetStatus() {
-    ScanStatus status = new ScanStatus((byte) Integer.parseInt("33"));
+    ScanStatus status = new ScanStatus(Integer.parseInt("33"));
     assertTrue(status.isInitialized());
     assertFalse(status.isScanning());
     assertFalse(status.isFinishedScan());

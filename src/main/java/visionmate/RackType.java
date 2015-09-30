@@ -1,5 +1,8 @@
 package visionmate;
 
+/**
+ * Immutable object class to represent possible rack products to be scanned
+ */
 public class RackType {
   
   public static enum Manufacturer {ABGENE, MATRIX, NUNC};
@@ -8,6 +11,16 @@ public class RackType {
   private final int rows;
   private final int columns;
   
+  /**
+   * Constructs a new RackType from the String representation returned from the VisionMate server's Get Current Product command. 
+   * This String must be in the expected format, which is ARRCC, where A is the manufacturer type (A for Abgene, M for Matrix, or N 
+   * for Nunc), RR is the number of rows, and CC is the number of columns. Number of rows and columns must be 2 digits each, so preceded 
+   * by a zero if necessary
+   * 
+   * @param productString
+   * @throws NullPointerException if productString is null
+   * @throws IllegalArgumentException if productString isn't in the correct format
+   */
   public RackType(String productString) {
     if (productString == null) throw new NullPointerException("Product string must not be null");
     if (!productString.matches("^[AMN]\\d{4}$")) throw new IllegalArgumentException("Invalid product string");
@@ -32,6 +45,16 @@ public class RackType {
         " columns is invalid. Both must be between 1 and 24");
   }
   
+  /**
+   * Constructs a new RackType for a specific manufacturer and number of rows and columns. If the manufacturer is unknown, Matrix is 
+   * recommended as a default
+   * 
+   * @param manufacturer
+   * @param rows number of rows in the rack (1-24)
+   * @param columns number of columns in the rack (1-24)
+   * @throws NullPointerException if manufacturer is null
+   * @throws IllegalArgumentException if rows or columns is out of range 1-24
+   */
   public RackType(Manufacturer manufacturer, int rows, int columns) {
     if (manufacturer == null) throw new NullPointerException("Manufacturer must not be null");
     if (rows < 1 || rows > 24 || columns < 0 || columns > 24) throw new IllegalArgumentException(rows + " rows or " + columns + 
@@ -50,14 +73,25 @@ public class RackType {
     return manufacturer;
   }
 
+  /**
+   * @return the number of rows in this rack
+   */
   public int getRows() {
     return rows;
   }
 
+  /**
+   * @return the number of columns in this rack
+   */
   public int getColumns() {
     return columns;
   }
   
+  /**
+   * @return the string representation that should be sent to the VisionMate server when setting the current product, formatted ARRCC, 
+   * where A is the manufacturer type (A for Abgene, M for Matrix, or N for Nunc), RR is the number of rows, and CC is the number of 
+   * columns. Number of rows and columns must be 2 digits each, so preceded by a zero if necessary
+   */
   public String getStringRepresentation() {
     StringBuilder sb = new StringBuilder();
     switch (manufacturer) {

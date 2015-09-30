@@ -13,6 +13,10 @@ import org.apache.log4j.Logger;
 /**
  * This class is used to connect to a Thermo Scientific VisionMate server via Telnet and issue the commands neccessary to retrieve 
  * a scan of barcodes.
+ * <p>
+ * The VisionMate server supports only one concurrent connection, and a second connection will result in the disconnection of the first.
+ * <p>
+ * This class is not thread safe. External synchronization is required
  */
 public class VisionMateClient implements AutoCloseable {
   
@@ -40,7 +44,7 @@ public class VisionMateClient implements AutoCloseable {
   private final ServerConfig serverConfig;
 
   /**
-   * Creates a new VisionMateClient using the default ServerConfig. This includes all default VisionMate TCP/IP Server settings 
+   * Constructs a new VisionMateClient using the default ServerConfig. This includes all default VisionMate TCP/IP Server settings 
    * EXCEPT suffix character, which will default to "#" and must be matched in the actual server configuration.
    * 
    * @param host hostname or IP address of VisionMate server
@@ -52,7 +56,7 @@ public class VisionMateClient implements AutoCloseable {
   }
   
   /**
-   * Creates a new VisionMateClient using the provided ServerConfig. It is important to set a suffix character in the server 
+   * Constructs a new VisionMateClient using the provided ServerConfig. It is important to set a suffix character in the server 
    * configuration, so that end of line can be detected.
    * 
    * @param host hostname or IP address of VisionMate server
@@ -175,7 +179,7 @@ public class VisionMateClient implements AutoCloseable {
   public ScanStatus getStatus() throws SocketTimeoutException, IOException {
     String code = sendCommand(serverConfig.getGetStatusCommand());
     // cast and parse required because status is an unsigned byte, and Java bytes are signed
-    return new ScanStatus((byte) Integer.parseInt(code));
+    return new ScanStatus(Integer.parseInt(code));
   }
   
   /**
