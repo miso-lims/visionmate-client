@@ -60,6 +60,9 @@ public class ScanStatus {
         ", dataReady=" + dataReady + ", dataSent=" + dataSent + ", rack96=" + rack96 + ", error=" + error;
   }
   
+  /**
+   * @return the int representation of this ScanStatus, which is the format the server sends it in
+   */
   public int toInt() {
     int i = 0;
     if (initialized) i += 1;
