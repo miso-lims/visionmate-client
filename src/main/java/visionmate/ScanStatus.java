@@ -1,5 +1,6 @@
 package visionmate;
 
+
 /**
  * Immutable object class to translate the scanner's status bits into a more usable format. A ScanStatus is a snapshot of the scanner's 
  * status and cannot be updated as status changes occur
@@ -57,6 +58,18 @@ public class ScanStatus {
   public String toString() {
     return "Scan status: initialized=" + initialized + ", scanning=" + scanning + ", finishedScan=" + finishedScan +
         ", dataReady=" + dataReady + ", dataSent=" + dataSent + ", rack96=" + rack96 + ", error=" + error;
+  }
+  
+  public int toInt() {
+    int i = 0;
+    if (initialized) i += 1;
+    if (scanning) i += 2;
+    if (finishedScan) i += 4;
+    if (dataReady) i += 8;
+    if (dataSent) i += 16;
+    if (rack96) i += 32;
+    if (error) i += 128;
+    return i;
   }
 
   /**

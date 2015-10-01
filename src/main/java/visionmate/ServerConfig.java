@@ -214,6 +214,16 @@ public class ServerConfig {
   }
 
   /**
+   * gets the text command for the Set Current Product operation, used to configure the rack type to scan. The rack type information 
+   * must be appended to this
+   * 
+   * @return the command
+   */
+  public String getSetProductCommand() {
+    return setProductCommand;
+  }
+  
+  /**
    * gets the text command for the Set Current Product operation, used to configure the rack type to scan
    * 
    * @param product the rack type to configure

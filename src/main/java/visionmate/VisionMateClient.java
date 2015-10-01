@@ -75,7 +75,7 @@ public class VisionMateClient implements AutoCloseable {
   }
   
   /**
-   * Connects to the server. The configured timeout will be use both while connecting, and for subsequent requests
+   * Connects to the server. The configured timeout will be used both while connecting, and for subsequent requests
    * 
    * @throws IOException if the client fails to connect
    */
