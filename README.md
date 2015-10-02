@@ -10,19 +10,19 @@ A Java client for accessing a Thermo Scientific VisionMate scanner via TCP/IP.
 
 This will run unit tests, and compile the project, creating two jars
 
-* visionmate-client-<version\>.jar
-* visionmate-client-<version\>-jar-with-dependencies.jar
+* visionmate-client-\<version\>.jar
+* visionmate-client-\<version\>-jar-with-dependencies.jar
 
 ##Testing
 
 ### Mock server
 
-A mock server class is included to allow testing without interacting with a real server. The mock server is made to imitate the real server as much as possible, including the odd things that it does.
+A mock server class is included to allow testing without interacting with a real server. The mock server is made to imitate the real server as much as possible. Methods are provided to manipulate its current state and data before issuing commands to it over TCP/IP.
 
 ### CLI
 
 	```
-	java -jar \<jar-with-dependencies\> <\server-ip\> \<server-port\>
+	java -jar <jar-with-dependencies> <server-ip> <server-port>
 	```
 
 A small CLI application is included for testing with a real server. Run it and type 'help' for a list of commands.
@@ -59,11 +59,14 @@ There are also convenience methods for monitoring status updates and getting sca
 ###Example
 
 	```
-	try (VisionMateClient scanner = new VisionMateClient\(\<host-ip\> \<port\>) {
+	try (VisionMateClient scanner = new VisionMateClient(<host-ip> <port>) {
 		scanner.connect();
-		scanner.setCurrentProduct(Manufacturer.MATRIX, 8, 12); // expect a matrix box with 8 rows and 12 columns
-		scanner.resetStatus(); // reset status, so we can observe status updates to find when a new scan has occurred
+		// expect a matrix box with 8 rows and 12 columns
+		scanner.setCurrentProduct(Manufacturer.MATRIX, 8, 12);
+		// reset status, so we can observe status updates to find when a new scan has occurred
+		scanner.resetStatus();
 		System.out.println("Scan the rack now");
-		Scan scan = scanner.waitForScan(); // returns a scan if a rack is scanned before the wait time expires; otherwise returns null
+		// returns a scan if a rack is scanned before the wait time expires; otherwise returns null
+		Scan scan = scanner.waitForScan();
 	}
 	```
