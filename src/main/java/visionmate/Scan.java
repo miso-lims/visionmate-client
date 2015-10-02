@@ -158,7 +158,7 @@ public class Scan {
    */
   public static int getNumberForChar(char letter) {
     if (letter >= 'a' && letter <= 'x') letter = Character.toUpperCase(letter);
-    if (letter < 'A' || letter >= 'X') throw new IllegalArgumentException("Row letter must be between A and X");
+    if (letter < 'A' || letter > 'X') throw new IllegalArgumentException("Row letter must be between A and X");
     return letter - 'A' + 1;
   }
 

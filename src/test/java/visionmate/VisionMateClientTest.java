@@ -15,6 +15,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import visionmate.RackType.Manufacturer;
+import visionmate.mockServer.MockScannerServer;
 
 public class VisionMateClientTest {
 
