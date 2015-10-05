@@ -4,9 +4,14 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 public class ScanTest {
+  
+  @Rule
+  public final ExpectedException exception = ExpectedException.none();
   
   @Test
   public void testScan() {
@@ -91,6 +96,48 @@ public class ScanTest {
     assertFalse(scan.isEmpty());
     assertTrue(scan.isFull());
     assertTrue(scan.getNoReadCount() == 3);
+  }
+  
+  @Test
+  public void test1ToA() {
+    assertEquals(Scan.getCharForNumber(1), 'A');
+  }
+  
+  @Test
+  public void testUpperATo1() {
+    assertEquals(Scan.getNumberForChar('A'), 1);
+  }
+  
+  @Test
+  public void testLowerATo1() {
+    assertEquals(Scan.getNumberForChar('a'), 1);
+  }
+  
+  @Test
+  public void test24toX() {
+    assertEquals(Scan.getCharForNumber(24), 'X');
+  }
+  
+  @Test
+  public void testUpperXTo24() {
+    assertEquals(Scan.getNumberForChar('X'), 24);
+  }
+  
+  @Test
+  public void testLowerXTo24() {
+    assertEquals(Scan.getNumberForChar('x'), 24);
+  }
+  
+  @Test
+  public void testInvalidLowNum() {
+    exception.expect(IllegalArgumentException.class);
+    Scan.getCharForNumber(0);
+  }
+  
+  @Test
+  public void testInvalidHighNum() {
+    exception.expect(IllegalArgumentException.class);
+    Scan.getCharForNumber(25);
   }
   
 }
