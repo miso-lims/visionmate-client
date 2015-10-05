@@ -4,9 +4,7 @@ A Java client for accessing a Thermo Scientific VisionMate scanner via TCP/IP.
 
 ##Compile
 
-	```
 	mvn clean install
-	```
 
 This will run unit tests, and compile the project, creating two jars
 
@@ -21,17 +19,13 @@ A mock server class is included to allow testing without interacting with a real
 
 ### CLI
 
-	```
 	java -jar <jar-with-dependencies> <server-ip> <server-port>
-	```
 
 A small CLI application is included for testing with a real server. Run it and type 'help' for a list of commands.
 
 ### Unit tests
 
-	```
 	mvn test
-	```
 
 The unit tests make use of the mock server, so that a real server is not required.
 
@@ -39,9 +33,15 @@ The unit tests make use of the mock server, so that a real server is not require
 
 ###Configuration
 
-A ServerConfig object holds configuration settings that MUST match the server's configuration. It is recommended to use the default settings for everything EXCEPT for the suffix character. The suffix character is used to mark end of line, and is required for the client to function. Default suffix character on the server is not specified, so this must be configured before this client can be used.
+**Server Setup**
+1. Enable the TCP/IP server: Open the VisionMate software and go to Export > Enable TCP/IP Server
+2. Display the TCP/IP tabs: Config > Show TCP/IP Tab
+3. Set a suffix character \(TCP/IP Server tab\). A suffix character marks the end of response data and is required for the client to function correctly. It is ideal to use a non-printable character to ensure that it is not found in barcodes or other data that the server may send. The suggested character is ASCII control character 3 \(the end of text character\), which can be chosen by entering '\[3\]'
 
-Not all server configuration options are supported, so it is recommended to leave any options which are not available via ServerConfig at their default settings.
+It is recommended to leave other settings at their default, but if you'd like to change anything else, ensure that the option is supported in the client (see below).
+
+**Client Setup**
+A ServerConfig object holds configuration settings that MUST match the server's configuration. It is recommended to use the default settings for everything EXCEPT for the suffix character. The default and recommended suffix character in the client is control character 3, as noted above.
 
 ###Supported Operations
 
@@ -58,15 +58,20 @@ There are also convenience methods for monitoring status updates and getting sca
 
 ###Example
 
-	```
 	try (VisionMateClient scanner = new VisionMateClient(<host-ip> <port>) {
 		scanner.connect();
 		// expect a matrix box with 8 rows and 12 columns
 		scanner.setCurrentProduct(Manufacturer.MATRIX, 8, 12);
+		
 		// reset status, so we can observe status updates to find when a new scan has occurred
 		scanner.resetStatus();
+		
 		System.out.println("Scan the rack now");
-		// returns a scan if a rack is scanned before the wait time expires; otherwise returns null
 		Scan scan = scanner.waitForScan();
+		if (scan == null) {
+			// timed out; no rack was scanned
+		}
+		else {
+			// rack was scanned
+		}
 	}
-	```

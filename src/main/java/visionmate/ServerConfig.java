@@ -6,12 +6,12 @@ package visionmate;
  * Depending on the discrepencies, likely symptoms include timeouts, failed requests, and misrepresented data (e.g. "No Tube" may not 
  * be recognized as a missing tube, instead being understood as a barcode String).
  * <p>
- * Note that the default constructor sets all options to their default values EXCEPT the Suffix Character, which is set to '#' rather than 
- * the server's default of null. This suffix character is required for the VisionMateClient to detect end of line in the server's 
- * responses.
+ * Note that the default constructor sets all options to their default values EXCEPT the Suffix Character, which is set to control 
+ * character 3 (end of text character) rather than the server's default of null. This suffix character is required for the 
+ * VisionMateClient to detect end of line in the server's responses.
  * <p>
- * It is recommended to keep with all default settings EXCEPT for the suffix character, which must be set to something. '#' is an ideal 
- * suffix character, because the server does not use the character for anything else.
+ * It is recommended to keep with all default settings EXCEPT for the suffix character, which must be set to something. A non-printable 
+ * control character is ideal because such characters cannot be found in barcodes
  */
 public class ServerConfig {
   
@@ -19,7 +19,7 @@ public class ServerConfig {
   
   private String acknowledge = "OK";
   private Character prefixChar = null;
-  private Character suffixChar = '#'; // Note: default is nothing, but we need something to tell us when we've reached EOL
+  private Character suffixChar = (char) 3; // Note: default is nothing, but we need something to tell us when we've reached EOL
   private String delimiter = ",";
   private SortOrder sortOrder = SortOrder.COLUMNS;
   
@@ -34,7 +34,8 @@ public class ServerConfig {
   private String resetStatusCommand = "Q";
 
   /**
-   * Constructs a new ServerConfig with all default server settings EXCEPT for the suffix character, which is set to '#'
+   * Constructs a new ServerConfig with all default server settings EXCEPT for the suffix character, which is set to control character 3 
+   * (End of text character)
    */
   public ServerConfig() {
     // Auto-generated constructor stub
