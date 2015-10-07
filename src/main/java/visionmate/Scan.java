@@ -78,6 +78,14 @@ public class Scan {
     return noRead;
   }
   
+  public int getRowCount() {
+    return barcodes.length;
+  }
+  
+  public int getColumnCount() {
+    return barcodes[0].length;
+  }
+  
   public String[][] getBarcodes() {
     String[][] copy = new String[barcodes.length][];
     for (int i = 0; i < barcodes.length; i++) {
