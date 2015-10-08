@@ -1,4 +1,4 @@
-package visionmate.mockServer;
+package ca.on.oicr.gsi.visionmate.mockServer;
 
 /**
  * Exception class to represent errors that the VisionMate scanner simply ignores and does not send any response to. These errors 

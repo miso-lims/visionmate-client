@@ -1,4 +1,4 @@
-package visionmate;
+package ca.on.oicr.gsi.visionmate;
 
 /**
  * Exception class to encapsulate errors reported by the scanner

@@ -1,4 +1,4 @@
-package visionmate;
+package ca.on.oicr.gsi.visionmate;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -14,8 +14,13 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import visionmate.RackType.Manufacturer;
-import visionmate.mockServer.MockScannerServer;
+import ca.on.oicr.gsi.visionmate.RackType;
+import ca.on.oicr.gsi.visionmate.Scan;
+import ca.on.oicr.gsi.visionmate.ScanStatus;
+import ca.on.oicr.gsi.visionmate.ScannerException;
+import ca.on.oicr.gsi.visionmate.VisionMateClient;
+import ca.on.oicr.gsi.visionmate.RackType.Manufacturer;
+import ca.on.oicr.gsi.visionmate.mockServer.MockScannerServer;
 
 public class VisionMateClientTest {
 

@@ -1,4 +1,4 @@
-package visionmate.mockServer;
+package ca.on.oicr.gsi.visionmate.mockServer;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,10 +9,10 @@ import java.net.Socket;
 
 import org.apache.log4j.Logger;
 
-import visionmate.RackType;
-import visionmate.Scan;
-import visionmate.ScanStatus;
-import visionmate.ServerConfig;
+import ca.on.oicr.gsi.visionmate.RackType;
+import ca.on.oicr.gsi.visionmate.Scan;
+import ca.on.oicr.gsi.visionmate.ScanStatus;
+import ca.on.oicr.gsi.visionmate.ServerConfig;
 
 /**
  * Simple socket server to mock the behaviour of the VisionMate TCP/IP server for testing purposes. Intended to run in a thread:

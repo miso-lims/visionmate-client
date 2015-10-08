@@ -1,4 +1,4 @@
-package visionmate;
+package ca.on.oicr.gsi.visionmate;
 
 /**
  * Immutable object class to represent possible rack products to be scanned

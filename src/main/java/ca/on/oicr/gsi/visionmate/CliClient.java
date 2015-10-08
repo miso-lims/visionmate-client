@@ -1,4 +1,4 @@
-package visionmate;
+package ca.on.oicr.gsi.visionmate;
 
 import java.io.BufferedReader;
 import java.io.IOException;

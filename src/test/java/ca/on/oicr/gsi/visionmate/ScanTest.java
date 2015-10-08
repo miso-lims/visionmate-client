@@ -1,4 +1,4 @@
-package visionmate;
+package ca.on.oicr.gsi.visionmate;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -7,6 +7,10 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import ca.on.oicr.gsi.visionmate.RackType;
+import ca.on.oicr.gsi.visionmate.Scan;
+import ca.on.oicr.gsi.visionmate.ServerConfig;
 
 public class ScanTest {
   

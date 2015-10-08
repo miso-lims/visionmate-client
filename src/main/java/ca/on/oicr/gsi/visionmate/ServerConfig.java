@@ -1,4 +1,4 @@
-package visionmate;
+package ca.on.oicr.gsi.visionmate;
 
 /**
  * This class encapsulates the server configuration options that affect the client. It is imperative that the settings provided to 
