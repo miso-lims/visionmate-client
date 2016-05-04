@@ -42,7 +42,7 @@
             <configuration>
                 <archive>
                     <manifest>
-                        <mainClass>visionmate.CliClient</mainClass>
+                        <mainClass>ca.on.oicr.gsi.visionmate.CliClient</mainClass>
                     </manifest>
                 </archive>
                 <descriptorRefs>
