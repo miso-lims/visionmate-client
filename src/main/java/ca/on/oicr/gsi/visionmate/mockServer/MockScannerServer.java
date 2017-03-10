@@ -29,15 +29,13 @@ import ca.on.oicr.gsi.visionmate.ServerConfig;
  * <p>
  * The mock server's state may be manipulated before issuing commands from a client.
  */
-public class MockScannerServer implements Runnable {
-  
+public class MockScannerServer implements Runnable, AutoCloseable {
+
   private final Logger log = Logger.getLogger(this.getClass());
-  
-  private static final int defaultPort = 8000;
-  
+
   private ServerConfig config = new ServerConfig();
-  private final int port;
-  
+  private final ServerSocket serverSocket;
+
   private RackType currentProduct = new RackType("M0812");
   private ScanStatus currentStatus = new ScanStatus(33); // initialized, rack96
   private Scan currentData = null;
@@ -45,8 +43,8 @@ public class MockScannerServer implements Runnable {
   /**
    * Constructs a new MockServerScanner that will listen on the default port (8000)
    */
-  public MockScannerServer() {
-    this.port = defaultPort;
+  public MockScannerServer() throws IOException {
+    this(0);
   }
   
   /**
@@ -54,17 +52,15 @@ public class MockScannerServer implements Runnable {
    * 
    * @param port
    */
-  public MockScannerServer(int port) {
-    this.port = port;
+  public MockScannerServer(int port) throws IOException {
+    serverSocket = new ServerSocket(port);
   }
   
   @Override
   public void run() {
     log.info("Mock server started");
-    try (
-        ServerSocket serverSocket = new ServerSocket(port);
-        Socket clientSocket = serverSocket.accept();
-        
+    try (Socket clientSocket = serverSocket.accept();
+
         PrintStream output = new PrintStream(clientSocket.getOutputStream());
         BufferedReader input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
     ) {
@@ -249,6 +245,15 @@ public class MockScannerServer implements Runnable {
     }
     if (config.getSuffixChar() != null) sb.append(config.getSuffixChar());
     return sb.toString();
+  }
+
+  public int getPort() {
+    return serverSocket.getLocalPort();
+  }
+
+  @Override
+  public void close() throws Exception {
+    serverSocket.close();
   }
 
 }
