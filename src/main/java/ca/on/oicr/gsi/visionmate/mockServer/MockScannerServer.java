@@ -33,8 +33,6 @@ public class MockScannerServer implements Runnable {
   
   private final Logger log = Logger.getLogger(this.getClass());
   
-  private static final int defaultPort = 8000;
-  
   private ServerConfig config = new ServerConfig();
   private final int port;
   
@@ -43,10 +41,15 @@ public class MockScannerServer implements Runnable {
   private Scan currentData = null;
   
   /**
-   * Constructs a new MockServerScanner that will listen on the default port (8000)
+   * Constructs a new MockServerScanner that will listen on an automatically-allocated port
+   * (port can be determined later via {@code getPort()})
+   * 
+   * @throws IOException 
    */
-  public MockScannerServer() {
-    this.port = defaultPort;
+  public MockScannerServer() throws IOException {
+    try (ServerSocket serverSocket = new ServerSocket(0)) {
+      this.port = serverSocket.getLocalPort();
+    }
   }
   
   /**
@@ -56,6 +59,10 @@ public class MockScannerServer implements Runnable {
    */
   public MockScannerServer(int port) {
     this.port = port;
+  }
+  
+  public int getPort() {
+    return port;
   }
   
   @Override

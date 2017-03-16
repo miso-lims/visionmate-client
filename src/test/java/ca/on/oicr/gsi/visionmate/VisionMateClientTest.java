@@ -1,24 +1,14 @@
 package ca.on.oicr.gsi.visionmate;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
-import java.net.UnknownHostException;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import ca.on.oicr.gsi.visionmate.RackType;
-import ca.on.oicr.gsi.visionmate.Scan;
-import ca.on.oicr.gsi.visionmate.ScanStatus;
-import ca.on.oicr.gsi.visionmate.ScannerException;
-import ca.on.oicr.gsi.visionmate.VisionMateClient;
 import ca.on.oicr.gsi.visionmate.RackType.Manufacturer;
 import ca.on.oicr.gsi.visionmate.mockServer.MockScannerServer;
 
@@ -28,11 +18,11 @@ public class VisionMateClientTest {
   private static VisionMateClient client;
   
   @BeforeClass
-  public static void setup() throws UnknownHostException {
+  public static void setup() throws IOException {
     server = new MockScannerServer();
     new Thread(server).start();
     
-    client = new VisionMateClient("127.0.0.1", 8000);
+    client = new VisionMateClient("127.0.0.1", server.getPort());
     try {
       client.connect();
     } catch (IOException e) {
