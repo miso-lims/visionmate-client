@@ -1,8 +1,8 @@
-#VisionMate Client
+# VisionMate Client
 
 A Java client for accessing a Thermo Scientific VisionMate scanner via TCP/IP.
 
-##Compile
+## Compile
 
 	mvn clean install
 
@@ -11,7 +11,7 @@ This will run unit tests, and compile the project, creating two jars
 * visionmate-client-\<version\>.jar
 * visionmate-client-\<version\>-jar-with-dependencies.jar
 
-##Testing
+## Testing
 
 ### Mock server
 
@@ -29,9 +29,9 @@ A small CLI application is included for testing with a real server. Run it and t
 
 The unit tests make use of the mock server, so that a real server is not required.
 
-##Usage
+## Usage
 
-###Configuration
+### Configuration
 
 **Server Setup**
 1. Enable the TCP/IP server: Open the VisionMate software and go to Export > Enable TCP/IP Server
@@ -43,7 +43,7 @@ It is recommended to leave other settings at their default, but if you'd like to
 **Client Setup**
 A ServerConfig object holds configuration settings that MUST match the server's configuration. It is recommended to use the default settings for everything EXCEPT for the suffix character. The default and recommended suffix character in the client is control character 3, as noted above.
 
-###Supported Operations
+### Supported Operations
 
 The following operations are available via the VisionMateClient
 
@@ -56,7 +56,7 @@ The following operations are available via the VisionMateClient
 
 There are also convenience methods for monitoring status updates and getting scan data when a fresh scan is completed.
 
-###Example
+### Example
 
 	try (VisionMateClient scanner = new VisionMateClient(<host-ip> <port>) {
 		scanner.connect();
