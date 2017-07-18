@@ -15,7 +15,10 @@ package ca.on.oicr.gsi.visionmate;
  */
 public class ServerConfig {
   
-  public static enum SortOrder {ROWS, COLUMNS};
+  public enum SortOrder {ROWS, COLUMNS};
+  
+  private static final String CMD_NOT_NULL="Command must not be null";
+  private static final String CMD_NOT_EMPTY="Command must not be empty";
   
   private String acknowledge = "OK";
   private Character prefixChar = null;
@@ -149,8 +152,8 @@ public class ServerConfig {
    * @param command
    */
   public void setGetStatusCommand(String command) {
-    if (command == null) throw new NullPointerException("Command must not be null");
-    if (command.isEmpty()) throw new IllegalArgumentException("Command must not be empty");
+    if (command == null) throw new NullPointerException(CMD_NOT_NULL);
+    if (command.isEmpty()) throw new IllegalArgumentException(CMD_NOT_EMPTY);
     this.getStatusCommand = command;
   }
 
@@ -169,8 +172,8 @@ public class ServerConfig {
    * @param command
    */
   public void setGetDataCommand(String command) {
-    if (command == null) throw new NullPointerException("Command must not be null");
-    if (command.isEmpty()) throw new IllegalArgumentException("Command must not be empty");
+    if (command == null) throw new NullPointerException(CMD_NOT_NULL);
+    if (command.isEmpty()) throw new IllegalArgumentException(CMD_NOT_EMPTY);
     this.getDataCommand = command;
   }
 
@@ -189,8 +192,8 @@ public class ServerConfig {
    * @param command
    */
   public void setGetLastErrorCommand(String command) {
-    if (command == null) throw new NullPointerException("Command must not be null");
-    if (command.isEmpty()) throw new IllegalArgumentException("Command must not be empty");
+    if (command == null) throw new NullPointerException(CMD_NOT_NULL);
+    if (command.isEmpty()) throw new IllegalArgumentException(CMD_NOT_EMPTY);
     this.getLastErrorCommand = command;
   }
 
@@ -209,8 +212,8 @@ public class ServerConfig {
    * @param command
    */
   public void setGetProductCommand(String command) {
-    if (command == null) throw new NullPointerException("Command must not be null");
-    if (command.isEmpty()) throw new IllegalArgumentException("Command must not be empty");
+    if (command == null) throw new NullPointerException(CMD_NOT_NULL);
+    if (command.isEmpty()) throw new IllegalArgumentException(CMD_NOT_EMPTY);
     this.getProductCommand = command;
   }
 
@@ -241,8 +244,8 @@ public class ServerConfig {
    * @param command base text command, not including rack type information
    */
   public void setSetProductCommand(String command) {
-    if (command == null) throw new NullPointerException("Command must not be null");
-    if (command.isEmpty()) throw new IllegalArgumentException("Command must not be empty");
+    if (command == null) throw new NullPointerException(CMD_NOT_NULL);
+    if (command.isEmpty()) throw new IllegalArgumentException(CMD_NOT_EMPTY);
     this.setProductCommand = command;
   }
 
@@ -261,8 +264,8 @@ public class ServerConfig {
    * @param command
    */
   public void setResetStatusCommand(String command) {
-    if (command == null) throw new NullPointerException("Command must not be null");
-    if (command.isEmpty()) throw new IllegalArgumentException("Command must not be empty");
+    if (command == null) throw new NullPointerException(CMD_NOT_NULL);
+    if (command.isEmpty()) throw new IllegalArgumentException(CMD_NOT_EMPTY);
     this.resetStatusCommand = command;
   }
 

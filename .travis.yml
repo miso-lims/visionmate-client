@@ -1,0 +1,30 @@
+dist : trusty
+language: java
+jdk:
+  - oraclejdk8
+sudo: required
+env: MAVEN_OPTS="-Xms1g -Xmx2g" 
+
+git:
+  depth: 3
+
+addons:
+    sonarcloud:
+        organization: "oicr-gsi"
+        token:
+            secure: "WHRSVNyidrtn1QJEqKZ+qVjCKj6AU2hEBdHULGPSUlXbS9dWy80X+s2/52zaQ746YomIqO2uyc6OGJlpCgCRCslJwComTSc2UJAztl9EQFAWAP4Xq+EWM9NtfKkiSYVGVKPuqqm5KfsVTZNxUPRTRsP7lCegWKta2OMqFnrw6dSZ5wVA/XfDFnsk0vms+E0ICeDaDVAKc1tMzFMLd4vCCcEN0GrTgw86TRz8LCfeOKAxpM7/S5sF9GAFJ+JpIImCHsK0wXq4ox1dyVwTEZfKbXufcW14hijreXR0083tHBT5G5on35nllBYOf95cg6I3TqgrDEbbabO5iCWIdh/xIbQzP71La++K2lizSq7/e9CbBEUWhAwczJMIWMPi2lwTs9gBIfJKiETKsDcOaJKylyGwZSTG23tptI7WOltxKrkqxi7WKWMC+nzaqa26JH63/oNVLA4OiSQDXw/lUTxyx9MscmLVhYV149fpmrHijlECj310wkOYMxrjMyTyflkuRgdSDerGF5J1y7/iM7Y+uUDm1giO6Uez8/SRmSdbFeDBaNreY2a+tUYiIpbEa6xhvtC4VwaCF0R1s/gFs2OCuemCE08DbXz3J6bXLFfMtkgGRxywcdUuvTP0IlY7wJ2LEiYZEtBMeNvyMcSkL5AlaPGSZ5aZtFGHW0XtmzpkiXM="
+        github_token:
+            secure: "IAj6hi74xyfAcOioiFr5oS7pT4tsc7GffqvvgC1rjW7jHViVIgz1Uge3rDTwe6joImh7prd6mmQCVNvsMaJDPHrlVmpsfewkf9pUPAfLwDXA8PMI5GUGlms/Jpjne7xiSt6ZHPLJBh/mBJ1GWbGE9WilgrIrZU4X4KoijHJWf0zTpT23kz20FyDRGVoujboP0+1IvWh+d64ng522vDiVKv0XsxX5mQFpq/Gmy7RB2iTltYkAedyqL7YJGbB6gF/D9p6eLqCY5ZoyY0lL75rbzwyYHj9DP64+WcjvUoYjoM3H6eQlCXp3fbJ+NJiASVoDxQsQHzsUgYtLbu6x7R0GbRd0P5MNkzGHBBUluJqZmElJ2bS9x/d6MRBut6yHBDuY04WV/JwQiH2MVbnADmUnvz+eFF8xt+z2wB/zGiSsLAkYmJ0pra2ZfrW2bN+dKebwPmCTPT/EiH2Vd5bzx1XRJkgcp6Jy8faXl1bk6L+kI3OTNSSAo0mKKJYn7toCqWsVcPArfqvRPCLvoTIx5QXb27kbfZMxVBY7es4IUezVvD0zJw6oy2K4gSo1r+oOAAbkSUv8mJfAiSOzHtHtcZ2TI9KTKvyO1TsR3h4VSjG7/1xIGCBfJ0mdzsvu/ETsZABBlENlSQVRELU5P+FZ+SQ21oGNTsyvu+dt+uFz1i1s12E="
+
+script:
+  - mvn clean install
+  - 'if [[ ${TRAVIS_PULL_REQUEST_SLUG} == ${TRAVIS_REPO_SLUG} ]] ; then 
+        mvn org.jacoco:jacoco-maven-plugin:prepare-agent sonar:sonar ;
+     else 
+        echo "[WARN] SonarCloud cannot run on pull requests from forks." ; 
+     fi'
+
+cache:
+  directories:
+    - "$HOME/.sonar/cache"
+    - "$HOME/.m2"
