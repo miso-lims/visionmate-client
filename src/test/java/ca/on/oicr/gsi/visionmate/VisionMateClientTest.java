@@ -28,11 +28,11 @@ public class VisionMateClientTest {
   private static VisionMateClient client;
   
   @BeforeClass
-  public static void setup() throws UnknownHostException {
+  public static void setup() throws UnknownHostException, IOException {
     server = new MockScannerServer();
     new Thread(server).start();
-    
-    client = new VisionMateClient("127.0.0.1", 8000);
+
+    client = new VisionMateClient("127.0.0.1", server.getPort());
     try {
       client.connect();
     } catch (IOException e) {
