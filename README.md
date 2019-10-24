@@ -9,7 +9,7 @@ A Java client for accessing a Thermo Scientific VisionMate scanner via TCP/IP.
   software. Thermo Fisher has provided these two patches, which are required in order for this library to communicate
   with the scanner software. Unfortunately, the patches have not yet been included in an official release. Installation
   instructions are included in the archives.
-  * [TCPUpdate_dependancies.zip](patches/TCPUpdate_dependancies.zip)
+  * [TCPUpdate_dependencies.zip](patches/TCPUpdate_dependencies.zip)
   * [SBTCPServerV4.0.3.6.zip](patches/SBTCPServerV4.0.3.6.zip)
 
 ## Compile
@@ -59,14 +59,15 @@ option is supported in the client (see below).
 
 **Server Setup - V4 VisionMate Software**
 
-1. Enable the TCP/IP server: Export Options (yellow icon) > TCP Server \(a checkmark should appear to indicate it is
-   enabled\)
-2. Set a suffic character: Export Options > TCP Server > Config > Data Field Suffix. The suggested character is ASCII
+![VisionMate v4 Software Menus](visionmate_menus.png)
+
+1. Enable the TCP/IP server: Export Options > TCP Server \(a checkmark should appear to indicate it is enabled\)
+2. Set a suffix character: Export Options > TCP Server > Config > Data Field Suffix. The suggested character is ASCII
    control character 3 \(the end of text character\), which can be chosen by entering '\[3\]'
 3. Add a rack type: You will need a rack with tubes in it in order to set this up as there is no option to manually
-   define a rack type. Click the gear icon > RAD and follow the on-screen instructions to scan the rack. Name it in the
+   define a rack type. Click Settings > RAD and follow the on-screen instructions to scan the rack. Name it in the
    format MRRCC, replacing "RR" with the number of rows, and "CC" with the number of columns. e.g. "M0812" for a rack
-   with 8 rows and 12 columns. Ensure that this rack type is selected in Rack Formats \(grid-looking icon\)
+   with 8 rows and 12 columns. Ensure that this rack type is selected in Rack Formats
 
 It is recommended to leave other settings at their default, but if you'd like to change anything else, ensure that the
 option is supported in the client (see below).
