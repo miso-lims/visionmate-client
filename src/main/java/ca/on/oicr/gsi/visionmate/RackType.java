@@ -5,7 +5,31 @@ package ca.on.oicr.gsi.visionmate;
  */
 public class RackType {
   
-  public static enum Manufacturer {ABGENE, MATRIX, NUNC};
+  public static enum Manufacturer {
+    ABGENE('A'),
+    MATRIX('M'),
+    NUNC('A'),
+    OTHER('O');
+    
+    private final char code;
+    
+    private Manufacturer(char code) {
+      this.code = code;
+    }
+    
+    public char getCode() {
+      return code;
+    }
+    
+    public static Manufacturer getByCode(char code) {
+      for (Manufacturer value : Manufacturer.values()) {
+        if (value.getCode() == code) {
+          return value;
+        }
+      }
+      return null;
+    }
+  };
   
   private final Manufacturer manufacturer;
   private final int rows;
@@ -23,19 +47,10 @@ public class RackType {
    */
   public RackType(String productString) {
     if (productString == null) throw new NullPointerException("Product string must not be null");
-    if (!productString.matches("^[AMN]\\d{4}$")) throw new IllegalArgumentException("Invalid product string");
+    if (!productString.matches("^[AMNO]\\d{4}$")) throw new IllegalArgumentException("Invalid product string");
     
-    switch (productString.charAt(0)) {
-    case 'A':
-      this.manufacturer = Manufacturer.ABGENE;
-      break;
-    case 'M':
-      this.manufacturer = Manufacturer.MATRIX;
-      break;
-    case 'N':
-      this.manufacturer = Manufacturer.NUNC;
-      break;
-    default:
+    this.manufacturer = Manufacturer.getByCode(productString.charAt(0));
+    if (this.manufacturer == null) {
       throw new IllegalArgumentException("Invalid manufacturer initial. Must be A, M, or N");
     }
     
@@ -89,22 +104,12 @@ public class RackType {
   
   /**
    * @return the string representation that should be sent to the VisionMate server when setting the current product, formatted ARRCC, 
-   * where A is the manufacturer type (A for Abgene, M for Matrix, or N for Nunc), RR is the number of rows, and CC is the number of 
-   * columns. Number of rows and columns must be 2 digits each, so preceded by a zero if necessary
+   * where A is the manufacturer code, RR is the number of rows, and CC is the number of columns. Number of rows and columns must be 2
+   * digits each, so preceded by a zero if necessary
    */
   public String getStringRepresentation() {
-    StringBuilder sb = new StringBuilder();
-    switch (manufacturer) {
-    case ABGENE:
-      sb.append('A');
-      break;
-    case MATRIX:
-      sb.append('M');
-      break;
-    case NUNC:
-      sb.append('N');
-      break;
-    }
+    StringBuilder sb = new StringBuilder(5);
+    sb.append(manufacturer.getCode());
     if (rows < 10) sb.append("0");
     sb.append(rows);
     if (columns < 10) sb.append("0");
