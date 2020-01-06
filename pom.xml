@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>ca.on.oicr.gsi</groupId>
   <artifactId>visionmate</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>1.0.1</version>
   <name>VisionMate Scanner Client</name>
   
   <dependencies>
@@ -23,6 +23,14 @@
         <scope>test</scope>
     </dependency>
   </dependencies>
+  
+  <distributionManagement>
+    <repository>
+      <id>deploy.artifacts.oicr</id>
+      <name>GSI Releases</name>
+      <url>https://artifacts.oicr.on.ca/artifactory/gsi-release</url>
+    </repository>
+  </distributionManagement>
   
   <build>
     <plugins>
