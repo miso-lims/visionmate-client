@@ -53,6 +53,10 @@ The unit tests make use of the mock server, so that a real server is not require
    the client to function correctly. It is ideal to use a non-printable character to ensure that it is not found in
    barcodes or other data that the server may send. The suggested character is ASCII control character 3 \(the end of
    text character\), which can be chosen by entering '\[3\]'
+4. Use a fixed rack ID: Rack ID > Use Fixed ID
+5. Enable auto-login \(optional\) and ensure that settings are saved when the software is restarted
+    * Options > Auto Login > As Admin
+    * Options > Use Global Settings for all Users
 
 It is recommended to leave other settings at their default, but if you'd like to change anything else, ensure that the
 option is supported in the client (see below).
