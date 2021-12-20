@@ -7,7 +7,8 @@ import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import ca.on.oicr.gsi.visionmate.RackType;
 import ca.on.oicr.gsi.visionmate.Scan;
@@ -31,7 +32,7 @@ import ca.on.oicr.gsi.visionmate.ServerConfig;
  */
 public class MockScannerServer implements Runnable {
   
-  private final Logger log = Logger.getLogger(this.getClass());
+  private final Logger log = LoggerFactory.getLogger(this.getClass());
   
   private static final int defaultPort = 8000;
   
