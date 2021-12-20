@@ -6,9 +6,10 @@ import java.io.PrintStream;
 import java.net.InetAddress;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.apache.commons.net.telnet.TelnetClient;
-import org.apache.log4j.Logger;
 
 /**
  * This class is used to connect to a Thermo Scientific VisionMate server via Telnet and issue the commands neccessary to retrieve 
@@ -32,7 +33,7 @@ public class VisionMateClient implements AutoCloseable {
    */
   private static final int statusPollingDelay = 100;
   
-  private final Logger log = Logger.getLogger(this.getClass());
+  private final Logger log = LoggerFactory.getLogger(this.getClass());
   
   private final InetAddress host;
   private final int port;
