@@ -52,7 +52,7 @@ The unit tests make use of the mock server, so that a real server is not require
     ```
     git checkout master
     git pull
-    ./release <release_type>
+    ./release.sh <release_type>
     ```
 
 ## Usage

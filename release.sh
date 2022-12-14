@@ -23,7 +23,7 @@ if [[ "$1" = "major" ]] || [[ "$1" = "minor" ]] || [[ "$1" = "patch" ]]; then
 else
   usage_error
 fi
-exit 0
+
 # validate prerequisites
 if [[ ! $(command -v xmlstarlet) ]]; then
   echo "Error: xmlstarlet not found"
