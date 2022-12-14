@@ -41,6 +41,20 @@ A small CLI application is included for testing with a real server. Run it and t
 
 The unit tests make use of the mock server, so that a real server is not required.
 
+## Release procedure
+
+1. Choose the release type according to semantic versioning:
+   * "patch" if there are only fixes
+   * "minor" for most updates that add features
+   * "major" for milestone/huge updates
+2. Release
+
+    ```
+    git checkout master
+    git pull
+    ./release <release_type>
+    ```
+
 ## Usage
 
 ### Configuration
@@ -101,10 +115,10 @@ There are also convenience methods for monitoring status updates and getting sca
 		scanner.connect();
 		// expect a matrix box with 8 rows and 12 columns
 		scanner.setCurrentProduct(Manufacturer.MATRIX, 8, 12);
-		
+
 		// reset status, so we can observe status updates to find when a new scan has occurred
 		scanner.resetStatus();
-		
+
 		System.out.println("Scan the rack now");
 		Scan scan = scanner.waitForScan();
 		if (scan == null) {
